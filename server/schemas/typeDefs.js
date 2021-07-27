@@ -1,7 +1,6 @@
 // import the gql Tagged Template function
 const { gql } = require("apollo-server-express");
 
-// create our typeDefs Queries
 const typeDefs = gql`
   type Thought {
     _id: ID
@@ -9,9 +8,18 @@ const typeDefs = gql`
     createdAt: String
     username: String
     reactionCount: Int
+    reactions: [Reaction]
   }
+
+  type Reaction {
+    _id: ID
+    reactionBody: String
+    createdAt: String
+    username: String
+  }
+
   type Query {
-    thoughts: [Thought]
+    thoughts(username: String): [Thought]
   }
 `;
 

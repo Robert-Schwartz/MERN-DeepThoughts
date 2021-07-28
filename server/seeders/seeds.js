@@ -1,5 +1,9 @@
+// require faker npm package for dummy data
+// ===================================================
 const faker = require('faker');
 
+//connect to database
+// ===================================================
 const db = require('../config/connection');
 const { Thought, User } = require('../models');
 
@@ -8,6 +12,7 @@ db.once('open', async () => {
   await User.deleteMany({});
 
   // create user data
+  // ===================================================
   const userData = [];
 
   for (let i = 0; i < 50; i += 1) {
@@ -28,7 +33,9 @@ db.once('open', async () => {
     let friendId = userId;
 
     while (friendId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
+      const randomUserIndex = Math.floor(
+        Math.random() * createdUsers.ops.length
+      );
       friendId = createdUsers.ops[randomUserIndex];
     }
 
@@ -36,6 +43,7 @@ db.once('open', async () => {
   }
 
   // create thoughts
+  // ===================================================
   let createdThoughts = [];
   for (let i = 0; i < 100; i += 1) {
     const thoughtText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
@@ -54,13 +62,16 @@ db.once('open', async () => {
   }
 
   // create reactions
+  // ===================================================
   for (let i = 0; i < 100; i += 1) {
     const reactionBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username } = createdUsers.ops[randomUserIndex];
 
-    const randomThoughtIndex = Math.floor(Math.random() * createdThoughts.length);
+    const randomThoughtIndex = Math.floor(
+      Math.random() * createdThoughts.length
+    );
     const { _id: thoughtId } = createdThoughts[randomThoughtIndex];
 
     await Thought.updateOne(
@@ -70,6 +81,7 @@ db.once('open', async () => {
     );
   }
 
-  console.log('all done!');
+  // ===================================================
+  console.log("all done!");
   process.exit(0);
 });

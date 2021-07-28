@@ -26,6 +26,18 @@ const resolvers = {
       return Thought.findOne({ _id });
     },
   },
+  // Mutations
+  Mutation: {
+    addUser: async (parent, args) => {
+      //Mongoose User model adds new user in database with what's passed in as args.
+      const user = await User.create(args);
+
+      return user;
+    },
+    login: async () => {
+
+    }
+  }
 };
 
 module.exports = resolvers;

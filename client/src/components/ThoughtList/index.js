@@ -10,6 +10,7 @@ const ThoughtList = ({ thoughts, title }) => {
       <h3>{title}</h3>
       {thoughts &&
         thoughts.map((thought) => (
+          // track which data needs to be re-rendered if something changes with key
           <div key={thought._id} className="card mb-3">
             <p className="card-header">
               {thought.username}

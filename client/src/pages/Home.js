@@ -19,6 +19,7 @@ const Home = () => {
   );
 };
 
+export default Home
 
 /* Optional Chaining Notes:
 // no data will exist until the query to the server is finished

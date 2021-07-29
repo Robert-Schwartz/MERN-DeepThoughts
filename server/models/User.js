@@ -29,7 +29,6 @@ const userSchema = new Schema(
         ref: "Thought",
       },
     ],
-    // ref friends
     friends: [
       {
         type: Schema.Types.ObjectId,
@@ -65,7 +64,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
 userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
-
 
 // ===================================================
 const User = model("User", userSchema);

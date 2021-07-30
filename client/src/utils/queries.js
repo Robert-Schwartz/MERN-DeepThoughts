@@ -1,7 +1,7 @@
 /*
 * This file will store all of the GraphQL query requests.*
 */
-import { gql } from "@apollo/client";
+import gql from "graphql-tag";
 
 export const QUERY_THOUGHTS = gql`
   query thoughts($username: String) {
@@ -20,3 +20,4 @@ export const QUERY_THOUGHTS = gql`
     }
   }
 `;
+

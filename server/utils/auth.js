@@ -1,7 +1,5 @@
-// require JSON web token
 const jwt = require("jsonwebtoken");
 
-// in a real production, assign secret to env
 const secret = "mysecretsshhhhh";
 const expiration = "2h";
 
@@ -25,7 +23,7 @@ module.exports = {
     } catch {
       console.log("Invalid token");
     }
-    // return updated request object
+
     return req;
   },
   signToken: function ({ username, email, _id }) {

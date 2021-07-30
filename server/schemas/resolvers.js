@@ -1,11 +1,9 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Thought } = require("../models");
-// import the signToken function
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    // me auth
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
@@ -24,25 +22,21 @@ const resolvers = {
         .populate("thoughts")
         .populate("friends");
     },
-    // get a user by username
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .select("-__v -password")
         .populate("friends")
         .populate("thoughts");
     },
-    // get all thoughts
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Thought.find(params).sort({ createdAt: -1 });
     },
-    // get a thought by __id
     thought: async (parent, { _id }) => {
       return Thought.findOne({ _id });
     },
   },
-  // Mutations
-  //Mongoose User model adds new user in database with what's passed in as args.
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
@@ -66,7 +60,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // Add Thought
     addThought: async (parent, args, context) => {
       if (context.user) {
         const thought = await Thought.create({
@@ -85,7 +78,6 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
-    // Add Reaction
     addReaction: async (parent, { thoughtId, reactionBody }, context) => {
       if (context.user) {
         const updatedThought = await Thought.findOneAndUpdate(
@@ -103,7 +95,6 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
-    // Add Friend
     addFriend: async (parent, { friendId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(

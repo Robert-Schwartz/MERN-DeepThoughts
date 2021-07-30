@@ -18,7 +18,6 @@ const server = new ApolloServer({
 // integrate our Apollo server with the Express application as middleware
 server.applyMiddleware({ app });
 
-//Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -36,7 +35,6 @@ app.get("*", (req, res) => {
 db.once("open", () => {
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
-    // log where we can go to test our GQL API
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 });

@@ -1,22 +1,26 @@
 /*
 * This file will store all of the GraphQL query requests.*
 */
-import { gql } from "@apollo/client";
+import gql from "graphql-tag";
 
-export const QUERY_THOUGHTS = gql`
-  query thoughts($username: String) {
-    thoughts(username: $username) {
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
       _id
-      thoughtText
-      createdAt
       username
-      reactionCount
-      reactions {
+      email
+      friendCount
+      friends {
         _id
-        createdAt
         username
-        reactionBody
+      }
+      thoughts {
+        _id
+        thoughtText
+        createdAt
+        reactionCount
       }
     }
   }
 `;
+

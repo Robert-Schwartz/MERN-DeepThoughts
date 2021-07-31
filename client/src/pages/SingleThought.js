@@ -5,7 +5,7 @@ import ReactionList from "../components/ReactionList";
 import ReactionForm from "../components/ReactionForm";
 
 import Auth from "../utils/auth";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { QUERY_THOUGHT } from "../utils/queries";
 
 const SingleThought = (props) => {
